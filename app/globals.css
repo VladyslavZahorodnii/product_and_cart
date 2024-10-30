@@ -12,7 +12,8 @@ html {
 body {
   height: 100%;
   margin: 0;
-  background: linear-gradient(180deg, #232029, #231e2d);
+  background: rgb(142,135,255);
+  background: linear-gradient(349deg, rgba(142,135,255,1) 0%, rgba(118,236,255,0.9640231092436975) 46%, rgba(0,212,255,1) 100%);
   color: #ddd8e4;
 }
 

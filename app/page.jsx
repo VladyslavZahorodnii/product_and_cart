@@ -1,12 +1,9 @@
-import Navigation from "@/components/Navigation/Navigation";
-
 export default function Home() {
   return (
       <>
           <main>
-
-              <h1>Welcome to this NextJS Course!</h1>
-              <p>🔥 Let&apos;s get started! 🔥</p>
+              <h1>Please navigate to the Catalog page</h1>
+              <p>There, you'll find the perfect watches tailored just for you.</p>
           </main>
       </>
   );

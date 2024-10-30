@@ -1,17 +1,24 @@
 import Link from "next/link";
+import styles from "./Navigation.module.css";
 
 export default function Navigation() {
     return (
-        <nav>
-            <ul>
+        <nav className={styles.nav}>
+            <ul className={styles.navList}>
                 <li>
-                    <Link href="/"><img src="/logo.png" alt="watch logo"/></Link>
+                    <Link href="/">
+                        <img src="/logo.png" alt="watch logo" className={styles.logo}/>
+                    </Link>
                 </li>
                 <li>
-                    <Link href="/catalog">Catalog</Link>
+                    <Link href="/catalog" className={styles.link}>
+                        Catalog
+                    </Link>
                 </li>
                 <li>
-                    <Link href="/about">About</Link>
+                    <Link href="/about" className={styles.link}>
+                        About
+                    </Link>
                 </li>
             </ul>
         </nav>

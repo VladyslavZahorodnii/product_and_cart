@@ -12,27 +12,25 @@ html {
 body {
   height: 100%;
   margin: 0;
-  background: rgb(142,135,255);
-  background: linear-gradient(349deg, rgba(142,135,255,1) 0%, rgba(118,236,255,0.9640231092436975) 46%, rgba(0,212,255,1) 100%);
-  color: #ddd8e4;
+  background: rgba(118,236,255,0.96);
+  color: #fff;
 }
 
 main {
   text-align: center;
-  margin: 5rem auto;
+  margin: 0 auto;
 }
 
 main img {
   width: 8rem;
   height: 8rem;
   object-fit: cover;
-  filter: drop-shadow(0 0 4px #f6c363);
 }
 
 h1 {
   font-size: 3rem;
-  margin: 3rem auto;
-  color: #ede9f3;
+  margin: 0 auto;
+  color: #fff;
   font-family: 'Poppins', sans-serif;
 }
 

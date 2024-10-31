@@ -1,7 +1,28 @@
+'use client';
+
+import { useState, useContext } from "react";
 import Link from "next/link";
+import Modal from "components/Modal";
+import { CartContext} from "@/store/shopping-cart-context";
 import styles from "./Navigation.module.css";
+import CartModal from "@/components/CartModal";
+
 
 export default function Navigation() {
+    const { items } = useContext(CartContext);
+    const [modalCartIsOpen, setModalCartIsOpen] = useState(false);
+
+    // const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const cartQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
+
+    function handleCartOpen() {
+        setModalCartIsOpen(true);
+    }
+
+    function handleCartClose() {
+        setModalCartIsOpen(false);
+    }
+
     return (
         <nav className={styles.nav}>
             <ul className={styles.navList}>
@@ -21,6 +42,10 @@ export default function Navigation() {
                     </Link>
                 </li>
             </ul>
+            <button className="text-button" onClick={handleCartOpen}>Cart({cartQuantity})</button>
+            <Modal open={modalCartIsOpen} onClose={handleCartClose}>
+                <CartModal />
+            </Modal>
         </nav>
     );
 }

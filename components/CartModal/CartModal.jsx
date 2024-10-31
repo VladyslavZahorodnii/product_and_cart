@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CartContext} from "@/store/shopping-cart-context";
 import styles from "./CartModal.module.css";
+import Link from "next/link";
 
-export default function CartModal({onClickCheckout}) {
+export default function CartModal({ onClickCart }) {
     const { items, onUpdateCartItemQuantity, removeItemFromCart } = useContext(CartContext);
     const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
@@ -51,7 +52,9 @@ export default function CartModal({onClickCheckout}) {
                     <button className={styles.textButton}>Close</button>
                 </form>
                 {items.length > 0 &&
-                    <button className={styles.button} onClick={onClickCheckout}>Shopping Cart</button>}
+                    <button className={styles.button} onClick={onClickCart}>
+                        <Link href="/cart">Shopping cart</Link>
+                    </button>}
             </div>
         </div>
     )

@@ -63,7 +63,7 @@
 }
 
 .button {
-    padding: 0.5rem 1rem;
+    padding: 0;
     border: none;
     background-color: #0070f3;
     color: #fff;
@@ -71,6 +71,13 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.button a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #fff;
 }
 
 .button:hover {
@@ -98,5 +105,9 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #0070f3;
+    color: #d9534f;
+}
+
+.removeButton button:hover {
+    color: #c9302c;
 }

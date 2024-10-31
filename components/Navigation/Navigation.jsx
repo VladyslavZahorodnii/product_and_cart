@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useContext } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
 import Modal from "components/Modal";
 import { CartContext} from "@/store/shopping-cart-context";
@@ -42,9 +44,11 @@ export default function Navigation() {
                     </Link>
                 </li>
             </ul>
-            <button className={styles.cartButton} onClick={handleCartOpen}>MiniCart ({cartQuantity})</button>
+            <button className={styles.cartButton} onClick={handleCartOpen}>
+                <FontAwesomeIcon icon={faShoppingCart} />({cartQuantity})
+            </button>
             <Modal open={modalCartIsOpen} onClose={handleCartClose}>
-                <CartModal />
+                <CartModal onClickCart={handleCartClose} />
             </Modal>
         </nav>
     );

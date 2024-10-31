@@ -35,9 +35,9 @@
     gap: 8px;
     padding: 8px 16px;
     border: none;
-    border-radius: 5px;
-    background-color: #0070f3;
+    background: none;
     color: #fff;
+    font-size: 20px;
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.3s;

@@ -1,5 +1,6 @@
 import './globals.css'
 import Navigation from "@/components/Navigation/Navigation";
+import CartContextProvider from "@/store/shopping-cart-context";
 
 export const metadata = {
     title: 'Watches - Final project',
@@ -10,11 +11,13 @@ export default function RootLayout({children}) {
     return (
         <html lang="en">
             <body>
-                <header>
-                    <Navigation/>
-                </header>
-                {children}
-                <div id="modal"></div>
+                <CartContextProvider>
+                    <header>
+                        <Navigation/>
+                    </header>
+                    {children}
+                    <div id="modal"></div>
+                </CartContextProvider>
             </body>
         </html>
     );

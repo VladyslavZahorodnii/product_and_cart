@@ -42,7 +42,7 @@ export default function Navigation() {
                     </Link>
                 </li>
             </ul>
-            <button className="text-button" onClick={handleCartOpen}>Cart({cartQuantity})</button>
+            <button className={styles.cartButton} onClick={handleCartOpen}>MiniCart ({cartQuantity})</button>
             <Modal open={modalCartIsOpen} onClose={handleCartClose}>
                 <CartModal />
             </Modal>

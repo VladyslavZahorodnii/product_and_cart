@@ -28,3 +28,17 @@
 .link:hover {
     color: #FFF89A;
 }
+
+.cartButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0070f3;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}

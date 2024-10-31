@@ -61,6 +61,13 @@ function shoppingCartReducer(state, action) {
         };
     }
 
+    if (action.type === "REMOVE_ITEM") {
+        const updatedItems = state.items.filter(item => item.id !== action.payload.productId);
+        return {
+            items: updatedItems,
+        };
+    }
+
     return state;
 }
 
@@ -91,10 +98,20 @@ export default function CartContextProvider({children}) {
         })
     }
 
+    function handleRemoveItemFromCart(productId) {
+        shoppingCartDispatch({
+            type: "REMOVE_ITEM",
+            payload: {
+                productId,
+            },
+        });
+    }
+
     const ctxValue = {
         items: shoppingCartState.items,
         addItemToCart: handleAddItemToCart,
         onUpdateCartItemQuantity: handleUpdateCartItemQuantity,
+        removeItemFromCart: handleRemoveItemFromCart,
     }
 
     return <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>

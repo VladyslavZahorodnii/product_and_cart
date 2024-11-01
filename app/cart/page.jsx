@@ -1,8 +1,6 @@
 "use client";
 
 import { useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { CartContext } from "@/store/shopping-cart-context";
 import styles from "./page.module.css";
 import CartItem from "@/components/CartItem";

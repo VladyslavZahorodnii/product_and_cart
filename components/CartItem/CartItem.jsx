@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CartItem.module.css";
@@ -13,11 +12,9 @@ export default function CartItem({
     <li key={item.id} className={styles.cartItem}>
       {isShowImage && (
         <div className={styles.itemImage}>
-          <Image
+          <img
             src={item.image}
             alt={item.name}
-            width={50}
-            height={50}
             className={styles.productImage}
           />
         </div>

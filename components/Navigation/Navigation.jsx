@@ -1,55 +1,54 @@
-'use client';
+"use client";
 
 import { useState, useContext } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faShoppingCart} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Modal from "components/Modal";
-import { CartContext} from "@/store/shopping-cart-context";
+import { CartContext } from "@/store/shopping-cart-context";
 import styles from "./Navigation.module.css";
 import CartModal from "@/components/CartModal";
 
-
 export default function Navigation() {
-    const { items } = useContext(CartContext);
-    const [modalCartIsOpen, setModalCartIsOpen] = useState(false);
+  const { items } = useContext(CartContext);
+  const [modalCartIsOpen, setModalCartIsOpen] = useState(false);
 
-    // const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const cartQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
+  // const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const cartQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
 
-    function handleCartOpen() {
-        setModalCartIsOpen(true);
-    }
+  function handleCartOpen() {
+    setModalCartIsOpen(true);
+  }
 
-    function handleCartClose() {
-        setModalCartIsOpen(false);
-    }
+  function handleCartClose() {
+    setModalCartIsOpen(false);
+  }
 
-    return (
-        <nav className={styles.nav}>
-            <ul className={styles.navList}>
-                <li>
-                    <Link href="/">
-                        <img src="/logo.png" alt="watch logo" className={styles.logo}/>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/catalog" className={styles.link}>
-                        Catalog
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/about" className={styles.link}>
-                        About
-                    </Link>
-                </li>
-            </ul>
-            <button className={styles.cartButton} onClick={handleCartOpen}>
-                <FontAwesomeIcon icon={faShoppingCart} />({cartQuantity})
-            </button>
-            <Modal open={modalCartIsOpen} onClose={handleCartClose}>
-                <CartModal onClickCart={handleCartClose} />
-            </Modal>
-        </nav>
-    );
+  return (
+    <nav className={styles.nav}>
+      <ul className={styles.navList}>
+        <li>
+          <Link href="/">
+            <img src="/logo.png" alt="watch logo" className={styles.logo} />
+          </Link>
+        </li>
+        <li>
+          <Link href="/catalog" className={styles.link}>
+            Catalog
+          </Link>
+        </li>
+        <li>
+          <Link href="/about" className={styles.link}>
+            About
+          </Link>
+        </li>
+      </ul>
+      <button className={styles.cartButton} onClick={handleCartOpen}>
+        <FontAwesomeIcon icon={faShoppingCart} />({cartQuantity})
+      </button>
+      <Modal open={modalCartIsOpen} onClose={handleCartClose}>
+        <CartModal onClickCart={handleCartClose} />
+      </Modal>
+    </nav>
+  );
 }

@@ -1,119 +1,123 @@
-'use client';
+"use client";
 
-import {createContext, useReducer} from "react";
+import { createContext, useReducer } from "react";
 import PRODUCTS from "@/data/products";
 
 export const CartContext = createContext({
-    items: [],
-    addItemToCart: () => {},
-    onUpdateCartItemQuantity: () => {},
+  items: [],
+  addItemToCart: () => {},
+  onUpdateCartItemQuantity: () => {},
 });
 
 function shoppingCartReducer(state, action) {
-    if (action.type === "ADD_ITEM") {
-        const updatedItems = [...state.items];
+  if (action.type === "ADD_ITEM") {
+    const updatedItems = [...state.items];
 
-        const existingCartItemIndex = updatedItems.findIndex(
-            (cartItem) => cartItem.id === action.payload.id
-        );
-        const existingCartItem = updatedItems[existingCartItemIndex];
+    const existingCartItemIndex = updatedItems.findIndex(
+      (cartItem) => cartItem.id === action.payload.id,
+    );
+    const existingCartItem = updatedItems[existingCartItemIndex];
 
-        if (existingCartItem) {
-            updatedItems[existingCartItemIndex] = {
-                ...existingCartItem,
-                quantity: existingCartItem.quantity + 1,
-            };
-        } else {
-            const product = action.payload.product;
-            updatedItems.push({
-                id: action.payload.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                quantity: 1,
-            });
-        }
-
-        return {
-            items: updatedItems,
-        };
+    if (existingCartItem) {
+      updatedItems[existingCartItemIndex] = {
+        ...existingCartItem,
+        quantity: existingCartItem.quantity + 1,
+      };
+    } else {
+      const product = action.payload.product;
+      updatedItems.push({
+        id: action.payload.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: 1,
+      });
     }
 
-    if (action.type === "UPDATE_ITEM") {
-        const updatedItems = [...state.items];
-        const updatedItemIndex = updatedItems.findIndex(
-            (item) => item.id === action.payload.productId
-        );
+    return {
+      items: updatedItems,
+    };
+  }
 
-        const updatedItem = {
-            ...updatedItems[updatedItemIndex],
-        };
+  if (action.type === "UPDATE_ITEM") {
+    const updatedItems = [...state.items];
+    const updatedItemIndex = updatedItems.findIndex(
+      (item) => item.id === action.payload.productId,
+    );
 
-        updatedItem.quantity += action.payload.amount;
+    const updatedItem = {
+      ...updatedItems[updatedItemIndex],
+    };
 
-        if (updatedItem.quantity <= 0) {
-            updatedItems.splice(updatedItemIndex, 1);
-        } else {
-            updatedItems[updatedItemIndex] = updatedItem;
-        }
+    updatedItem.quantity += action.payload.amount;
 
-        return {
-            items: updatedItems,
-        };
+    if (updatedItem.quantity <= 0) {
+      updatedItems.splice(updatedItemIndex, 1);
+    } else {
+      updatedItems[updatedItemIndex] = updatedItem;
     }
 
-    if (action.type === "REMOVE_ITEM") {
-        const updatedItems = state.items.filter(item => item.id !== action.payload.productId);
-        return {
-            items: updatedItems,
-        };
-    }
+    return {
+      items: updatedItems,
+    };
+  }
 
-    return state;
+  if (action.type === "REMOVE_ITEM") {
+    const updatedItems = state.items.filter(
+      (item) => item.id !== action.payload.productId,
+    );
+    return {
+      items: updatedItems,
+    };
+  }
+
+  return state;
 }
 
-export default function CartContextProvider({children}) {
-    const [shoppingCartState, shoppingCartDispatch] = useReducer(
-        shoppingCartReducer,
-        {
-            items: [],
-        }
-    )
+export default function CartContextProvider({ children }) {
+  const [shoppingCartState, shoppingCartDispatch] = useReducer(
+    shoppingCartReducer,
+    {
+      items: [],
+    },
+  );
 
-    async function handleAddItemToCart(id) {
-        const product = PRODUCTS.find((product) => product.id === id);
+  async function handleAddItemToCart(id) {
+    const product = PRODUCTS.find((product) => product.id === id);
 
-        shoppingCartDispatch({
-            type: "ADD_ITEM",
-            payload: { id, product },
-        })
-    }
+    shoppingCartDispatch({
+      type: "ADD_ITEM",
+      payload: { id, product },
+    });
+  }
 
-    function handleUpdateCartItemQuantity(productId, amount) {
-        shoppingCartDispatch({
-            type: "UPDATE_ITEM",
-            payload: {
-                productId,
-                amount
-            },
-        })
-    }
+  function handleUpdateCartItemQuantity(productId, amount) {
+    shoppingCartDispatch({
+      type: "UPDATE_ITEM",
+      payload: {
+        productId,
+        amount,
+      },
+    });
+  }
 
-    function handleRemoveItemFromCart(productId) {
-        shoppingCartDispatch({
-            type: "REMOVE_ITEM",
-            payload: {
-                productId,
-            },
-        });
-    }
+  function handleRemoveItemFromCart(productId) {
+    shoppingCartDispatch({
+      type: "REMOVE_ITEM",
+      payload: {
+        productId,
+      },
+    });
+  }
 
-    const ctxValue = {
-        items: shoppingCartState.items,
-        addItemToCart: handleAddItemToCart,
-        onUpdateCartItemQuantity: handleUpdateCartItemQuantity,
-        removeItemFromCart: handleRemoveItemFromCart,
-    }
+  const ctxValue = {
+    items: shoppingCartState.items,
+    addItemToCart: handleAddItemToCart,
+    onUpdateCartItemQuantity: handleUpdateCartItemQuantity,
+    removeItemFromCart: handleRemoveItemFromCart,
+  };
 
-    return <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>
-};
+  return (
+    <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>
+  );
+}

@@ -1,11 +1,10 @@
 "use client";
 
 import { useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import CartItem from "@/components/CartItem/CartItem";
 import { CartContext } from "@/store/shopping-cart-context";
 import styles from "./CartModal.module.css";
-import Link from "next/link";
 
 export default function CartModal({ onClickCart }) {
   const { items, onUpdateCartItemQuantity, removeItemFromCart } =
@@ -23,28 +22,13 @@ export default function CartModal({ onClickCart }) {
       {items.length > 0 && (
         <ul>
           {items.map((item) => (
-            <li key={item.id} className={styles.cartItem}>
-              <div>
-                <span>{item.name}</span>
-              </div>
-              <div className={styles.cartItemActions}>
-                <button onClick={() => onUpdateCartItemQuantity(item.id, -1)}>
-                  -
-                </button>
-                <span>{item.quantity}</span>
-                <button onClick={() => onUpdateCartItemQuantity(item.id, 1)}>
-                  +
-                </button>
-              </div>
-              <div>
-                <span>${item.price}</span>
-              </div>
-              <div className={styles.removeButton}>
-                <button onClick={() => removeItemFromCart(item.id)}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </div>
-            </li>
+            <CartItem
+              key={item.id}
+              item={item}
+              onUpdateCartItemQuantity={onUpdateCartItemQuantity}
+              removeItemFromCart={removeItemFromCart}
+              isShowImage={false}
+            />
           ))}
         </ul>
       )}

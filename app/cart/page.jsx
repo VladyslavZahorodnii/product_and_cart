@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { CartContext } from "@/store/shopping-cart-context";
 import styles from "./page.module.css";
+import CartItem from "@/components/CartItem";
 
 export default function CartPage() {
   const { items, onUpdateCartItemQuantity, removeItemFromCart } =
@@ -23,35 +24,13 @@ export default function CartPage() {
         {items.length > 0 && (
           <ul>
             {items.map((item) => (
-              <li key={item.id} className={styles.cartItem}>
-                <div className={styles.itemImage}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className={styles.productImage}
-                  />
-                </div>
-                <div className={styles.itemName}>
-                  <span>{item.name}</span>
-                </div>
-                <div className={styles.cartItemActions}>
-                  <button onClick={() => onUpdateCartItemQuantity(item.id, -1)}>
-                    -
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button onClick={() => onUpdateCartItemQuantity(item.id, 1)}>
-                    +
-                  </button>
-                </div>
-                <div className={styles.itemPrice}>
-                  <span>${item.price}</span>
-                </div>
-                <div className={styles.removeButton}>
-                  <button onClick={() => removeItemFromCart(item.id)}>
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </div>
-              </li>
+              <CartItem
+                key={item.id}
+                item={item}
+                onUpdateCartItemQuantity={onUpdateCartItemQuantity}
+                removeItemFromCart={removeItemFromCart}
+                isShowImage={true}
+              />
             ))}
           </ul>
         )}
